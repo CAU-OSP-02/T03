@@ -1,20 +1,16 @@
 #!/usr/bin/env python3
-# v.1.2 211117
-# 기본적 손 인식 기술 구현 완료
+# v.1.3
+# 기본적 손 인식 기술 구현 완료 + 손모양 추가 중
 
 import cv2
 import mediapipe as mp
 import numpy as np
 
-gesture = {
-    0:'fist', 1:'one', 2:'two', 3:'three', 4:'four', 5:'five',
-    6:'six', 7:'rock', 8:'spiderman', 9:'yeah', 10:'ok'
-}   #MediaPipe 제공 제스쳐
 hand_gesture = {
     0:'fist', 1:'one', 2:'gun', 3:'three', 4:'four', 5:'five',
     6:'promise', 7:'spiderman', 8:'niconiconi', 9:'two', 10:'ok',
-    11:'claws', 12:'good', 13:'illionaire', 14:'dog'
-}   #게임에 사용할 제스처 세트 -> 아직 적용안됨
+    11:'claws', 12:'good', 13:'fanxyChild', 14:'dog'
+}   #게임에 사용할 제스처 세트 -> 12까지 구현
 
 #MediaPipe hands model
 mp_hands = mp.solutions.hands
@@ -22,14 +18,18 @@ mp_drawing = mp.solutions.drawing_utils #웹캠에서 손가락 뼈마디 부분
 hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.5, min_tracking_confidence=0.5)  #모드 세팅
 
 #Gesture recognition model
-file = np.genfromtxt('gesture_train_original.csv', delimiter=',')    #csv 파일 받아와서 필요한 정보 뽑기
+file = np.genfromtxt('gesture_trained.csv', delimiter=',')    #csv 파일 받아와서 필요한 정보 뽑기
 angle = file[:,:-1].astype(np.float32)
 label = file[:, -1].astype(np.float32)
 knn = cv2.ml.KNearest_create()  #KNN(K-Nearest Neighbors) 알고리즘을 통해 손모양 학습?
 knn.train(angle, cv2.ml.ROW_SAMPLE, label)
 
 cam = cv2.VideoCapture(0) #캠켜기
-
+cam.set(cv2.CAP_PROP_FRAME_WIDTH, 480)  #캠크기 조절
+cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480) #캠크기 조절
+#
+#def hf_progress(problem, ges_set = hand_gesture):
+#
 
 while cam.isOpened():   #카메라가 열려있으면..
     success, image = cam.read() #한 프레임 씩 읽어옴
@@ -67,13 +67,13 @@ while cam.isOpened():   #카메라가 열려있으면..
             idx = int(results[0][0])
             
 
-            cv2.putText(image, text = gesture[idx].upper(), org=(20, 60), fontFace = cv2.FONT_HERSHEY_SIMPLEX, fontScale = 2, color = 255, thickness = 3)
+            cv2.putText(image, text = hand_gesture[idx].upper(), org=(20, 60), fontFace = cv2.FONT_HERSHEY_SIMPLEX, fontScale = 2, color = 255, thickness = 3)
 
             mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS) #마디마디에 그려주는
     
     cv2.imshow('Hand Cam', image)
     
-    if cv2.waitKey(1) == ord('q'):
+    if cv2.waitKey(1) == ord('q'):  #q누르면 종료
         break
 
 cam.release()
