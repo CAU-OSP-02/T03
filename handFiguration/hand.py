@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
-# v.1.3
-# 기본적 손 인식 기술 구현 완료 + 손모양 추가 중
+# v.1.4
+# 손모양 총 15개 구현 완료 / 제시된 손모양을 맞추는 기능 추가
 
 import cv2
 import mediapipe as mp
 import numpy as np
+import random as r
 
 hand_gesture = {
     0:'fist', 1:'one', 2:'gun', 3:'three', 4:'four', 5:'five',
     6:'promise', 7:'spiderman', 8:'niconiconi', 9:'two', 10:'ok',
     11:'claws', 12:'good', 13:'fanxyChild', 14:'dog'
-}   #게임에 사용할 제스처 세트 -> 12까지 구현
+}   #게임에 사용할 제스처 세트
+input_gesture = 0
+input_gesture_switch = 0
+delay_time = 0
 
 #MediaPipe hands model
 mp_hands = mp.solutions.hands
@@ -27,9 +31,8 @@ knn.train(angle, cv2.ml.ROW_SAMPLE, label)
 cam = cv2.VideoCapture(0) #캠켜기
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, 480)  #캠크기 조절
 cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480) #캠크기 조절
-#
-#def hf_progress(problem, ges_set = hand_gesture):
-#
+
+
 
 while cam.isOpened():   #카메라가 열려있으면..
     success, image = cam.read() #한 프레임 씩 읽어옴
@@ -67,13 +70,53 @@ while cam.isOpened():   #카메라가 열려있으면..
             idx = int(results[0][0])
             
 
-            cv2.putText(image, text = hand_gesture[idx].upper(), org=(20, 60), fontFace = cv2.FONT_HERSHEY_SIMPLEX, fontScale = 2, color = 255, thickness = 3)
+#            cv2.putText(image, text = hand_gesture[idx].upper(), org=(20, 60), fontFace = cv2.FONT_HERSHEY_SIMPLEX, fontScale = 2, color = 255, thickness = 3)
+            #손 가장 아랫부분에 제스쳐 이름 출력
+            org = (int(hand_landmarks.landmark[0].x * image.shape[1]), int(hand_landmarks.landmark[0].y * image.shape[0]))
+            cv2.putText(image, text=hand_gesture[idx].upper(), org=(org[0], org[1] + 30), fontFace = cv2.FONT_HERSHEY_SIMPLEX, fontScale = 1, color=255, thickness = 2)
 
             mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS) #마디마디에 그려주는
+            
+            #손모양이 맞는지 아닌지 맞춰보기
+            if input_gesture_switch:
+                if idx == input_gesture:
+                    delay_time += 1
+                    if delay_time > 15:
+                        input_gesture_switch = 0
+                        delay_time = 0
+                        print("okok")
     
+    if input_gesture_switch == 1:
+        cv2.putText(image, text = hand_gesture[input_gesture].upper(), org = (10,30), fontFace = cv2.FONT_HERSHEY_SIMPLEX, fontScale = 1, color = 255, thickness = 2)
+    
+    if cv2.waitKey(1) == ord('r'):  #input_gesture 랜덤으로 뚱땅뚱땅(임시)
+        input_gesture = r.randrange(15)
+        input_gesture_switch = 1
+        print(input_gesture_switch)
+
     cv2.imshow('Hand Cam', image)
-    
+
     if cv2.waitKey(1) == ord('q'):  #q누르면 종료
         break
 
+
 cam.release()
+
+#안되네요..ㅠㅠ
+#
+#def random_gesture(input_gesture_switch):
+#    input_gesture = r.randrange(15)
+#    input_gesture_switch = 1
+#    print(input_gesture_switch)
+#
+#    return input_gesture
+#
+#def hf_qna(input_gesture_switch, idx, img, delay_time = 0):
+#    if input_gesture_switch:
+#        if idx == input_gesture:
+#            delay_time += 1
+#            if answer_delay > 20:
+#                input_gesture_switch = 0
+#                delay_time = 0
+#                cv2.putText(img, text = "Correct", org = (100,240), fontFace = cv2.FONT_HERSHEY_SIMPLEX, fontScale = 1, color = (255, 0, 0), thickness = 5)
+#
