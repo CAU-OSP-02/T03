@@ -98,14 +98,6 @@ class SampleApp(tk.Tk):
         self._frame = new_frame
         self._frame.pack()
 
-class Start(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-        realcam()
-        tk.Label(self, text="").pack()
-        tk.Button(self, text="Quit",
-                  command=lambda: quit(), font=('휴먼엑스포', 25)).pack()
-
 class mainmenu(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
@@ -130,6 +122,14 @@ class mainmenu(tk.Frame):
 
         def quit(self):
             self.destroy()
+
+class Start(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        realcam()
+        tk.Label(self, text="").pack()
+        tk.Button(self, text="Quit",
+                  command=lambda: quit(), font=('휴먼엑스포', 25)).pack(side='bottom')
 
 class Store(tk.Frame):
     def __init__(self, master):
