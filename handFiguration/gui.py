@@ -32,7 +32,7 @@ def stop():
 class camcamcam(tk.Frame):
     def camcam():
         def camThread():
-            color = []
+#            color = []
             cap = cv2.VideoCapture(0)
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)  #캠크기 조절
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
@@ -66,14 +66,15 @@ class camcamcam(tk.Frame):
             thread_img.daemon = True
             thread_img.start()
 
-            root = tk.Tk()
-            root.title("Hand Figuration")
-            root.geometry('1920x1080')
-            root.minsize(1768,992)
-            root.maxsize(2560,1440)
-            root.mainloop()
+#            root = tk.Tk()
+#            root.title("Hand Figuration")
+#            root.geometry('1920x1080')
+#            root.minsize(1768,992)
+#            root.maxsize(2560,1440)
+#            root.mainloop()
     camcam()
     
+#class st_cam():
 
 class SampleApp(tk.Tk):
     def __init__(self):
