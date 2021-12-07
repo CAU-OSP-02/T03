@@ -29,10 +29,10 @@ def play():
 def stop():
     pygame.mixer.music.stop()
 
-class camcamcam(tk.Frame):
-    def camcam():
+def realcam():
+    class camcamcam(tk.Frame):
         def camThread():
-#            color = []
+    #            color = []
             cap = cv2.VideoCapture(0)
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)  #캠크기 조절
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
@@ -53,7 +53,7 @@ class camcamcam(tk.Frame):
                 if Frame is None:
                     Frame = tk.Label(image=image)
                     Frame.image = image
-                    Frame.pack(side="left")
+                    Frame.pack(side="top")
                 else:
                     Frame.configure(image=image)
                     Frame.image = image
@@ -72,7 +72,7 @@ class camcamcam(tk.Frame):
 #            root.minsize(1768,992)
 #            root.maxsize(2560,1440)
 #            root.mainloop()
-    camcam()
+
     
 #class st_cam():
 
@@ -90,12 +90,20 @@ class SampleApp(tk.Tk):
         self._frame = new_frame
         self._frame.pack()
 
+class realstart(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        realcam()
+        tk.Label(self, text="").pack()
+        tk.Button(self, text="Go Back To Main Menu",
+                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포', 30)).pack()
+
 class mainmenu(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         tk.Label(self, text="Hand Figuration", font=('휴먼엑스포', 60)).pack(side="top", fill="x", pady=150)
         tk.Button(self, text="Start",
-                  command=lambda: master.switch_frame(camcamcam), width = 10 , height = 1, font=('휴먼엑스포', 30)).pack()
+                  command=lambda: master.switch_frame(Start), width = 10 , height = 1, font=('휴먼엑스포', 30)).pack()
         tk.Label(self, text="").pack()
         tk.Button(self, text="Store",
                   command=lambda: master.switch_frame(Store), width = 10 , height = 1, font=('휴먼엑스포', 30)).pack()
@@ -119,6 +127,11 @@ class Start(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         tk.Label(self, text="Start", font=('휴먼엑스포', 60)).pack(side="top", fill="x", pady=100)
+        tk.Button(self, text="시작하기",
+                  command=lambda: master.switch_frame(realstart), width = 10 , height = 1, font=('휴먼엑스포', 30)).pack()
+        tk.Label(self, text="").pack()
+        tk.Button(self, text="Go Back To Main Menu",
+                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포', 30)).pack()
 
 class Store(tk.Frame):
     def __init__(self, master):
