@@ -95,8 +95,8 @@ class realstart(tk.Frame):
         tk.Frame.__init__(self, master)
         realcam()
         tk.Label(self, text="").pack()
-        tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포', 30)).pack()
+        tk.Button(self, text="Quit",
+                  command=lambda: quit(), font=('휴먼엑스포', 30)).pack()
 
 class mainmenu(tk.Frame):
     def __init__(self, master):
