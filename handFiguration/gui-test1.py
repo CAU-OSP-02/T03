@@ -80,7 +80,6 @@ def realcam():
                     Frame.image = image
 
         if __name__ == '__main__':
-
                 thread_img = threading.Thread(target=camThread, args=())
                 thread_img.daemon = True
                 thread_img.start()
@@ -99,7 +98,7 @@ class SampleApp(tk.Tk):
         self._frame = new_frame
         self._frame.pack()
 
-class realstart(tk.Frame):
+class Start(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         realcam()
@@ -131,16 +130,6 @@ class mainmenu(tk.Frame):
 
         def quit(self):
             self.destroy()
-
-class Start(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-        tk.Label(self, text="Start", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=70)
-        tk.Button(self, text="시작하기",
-                  command=lambda: master.switch_frame(realstart), width = 10 , height = 1, font=('휴먼엑스포',25)).pack()
-        tk.Label(self, text="").pack()
-        tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',20)).pack()
 
 class Store(tk.Frame):
     def __init__(self, master):
