@@ -110,7 +110,7 @@ class realstart(tk.Frame):
 class mainmenu(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        tk.Label(self, text="Hand Figuration", font=('휴먼엑스포', 50)).pack(side="top", fill="x", pady=100)
+        tk.Label(self, text="Hand Figuration", font=('휴먼엑스포', 50)).pack(side="top", fill="x", pady=70)
         tk.Button(self, text="Start",
                   command=lambda: master.switch_frame(Start), width = 10 , height = 1, font=('휴먼엑스포', 25)).pack()
         tk.Label(self, text="").pack()
@@ -135,30 +135,30 @@ class mainmenu(tk.Frame):
 class Start(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        tk.Label(self, text="Start", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=100)
+        tk.Label(self, text="Start", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=70)
         tk.Button(self, text="시작하기",
                   command=lambda: master.switch_frame(realstart), width = 10 , height = 1, font=('휴먼엑스포',25)).pack()
         tk.Label(self, text="").pack()
         tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',25)).pack()
+                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',20)).pack()
 
 class Store(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        tk.Label(self, text="Store", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=60)
-        tk.Label(self, text="아이템을 구매하여 더욱 쾌적한 플레이를 즐겨보세요.", font=('휴먼엑스포',17)).pack()
+        tk.Label(self, text="Store", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=30)
+        tk.Label(self, text="아이템을 구매하여 더욱 쾌적한 플레이를 즐겨보세요.", font=('휴먼엑스포',20)).pack()
         tk.Label(self, text="").pack()
         tk.Label(self, text="").pack()
         labelExample = tk.Button(self, text="999999", font=('휴먼엑스포',25))
-        labelExample1 = tk.Button(self, text="0", font=('휴먼엑스포', 25))
-        labelExample2 = tk.Button(self, text="0", font=('휴먼엑스포', 25))
-        labelExample3 = tk.Button(self, text="0", font=('휴먼엑스포', 25))
+        labelExample1 = tk.Button(self, text="0", font=('휴먼엑스포', 20))
+        labelExample2 = tk.Button(self, text="0", font=('휴먼엑스포', 20))
+        labelExample3 = tk.Button(self, text="0", font=('휴먼엑스포', 20))
         labelExample.pack()
         tk.Label(self, text="").pack()
 
         def change_label_number1():
             counter = int(str(labelExample['text']))
-            counter -= 1000
+            counter -= 700
             labelExample.config(text=str(counter))
             counter = int(str(labelExample1['text']))
             counter += 1
@@ -172,88 +172,88 @@ class Store(tk.Frame):
             labelExample2.config(text=str(counter))
         def change_label_number3():
             counter = int(str(labelExample['text']))
-            counter -= 1000
+            counter -= 700
             labelExample.config(text=str(counter))
             counter = int(str(labelExample3['text']))
             counter += 1
             labelExample3.config(text=str(counter))
             
-        tk.Button(self, text="방해요소제거 (1000)", width=15, height=1, font=('휴먼엑스포', 25),
+        tk.Button(self, text="방해요소제거 (700)", width=15, height=1, font=('휴먼엑스포', 20),
                                 command=change_label_number1).pack()
         labelExample1.pack()
         tk.Label(self, text="").pack()
-        tk.Button(self, text="시간증가 (2500)", width=15, height=1,font=('휴먼엑스포', 25),
+        tk.Button(self, text="시간증가 (2500)", width=15, height=1,font=('휴먼엑스포', 20),
                                 command=change_label_number2).pack()
         labelExample2.pack()
         tk.Label(self, text="").pack()
-        tk.Button(self, text="코인두배 (1000)", width=15, height=1,font=('휴먼엑스포', 25),
+        tk.Button(self, text="코인두배 (700)", width=15, height=1,font=('휴먼엑스포', 20),
                                 command=change_label_number3).pack()
         labelExample3.pack()            
         tk.Label(self, text="").pack()
         tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',25)).pack()
+                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',20)).pack()
 
 class Ranking(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        tk.Label(self, text="Ranking", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=100)
+        tk.Label(self, text="Ranking", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=70)
         tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',25)).pack()
+                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',20)).pack()
 
 class How_To_Do(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        tk.Label(self, text="How To Do", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=100)
-        tk.Label(self, text="1. 화면에 뜨는 손동작에 맞춰 손모양을 취해주세요. 웹캠이 당신의 손바닥을 인식해 성공여부를 판별할 것입니다.", font=('휴먼엑스포',17)).pack()
+        tk.Label(self, text="How To Do", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=70)
+        tk.Label(self, text="1. 화면에 뜨는 손동작에 맞춰 손모양을 취해주세요. 웹캠이 당신의 손바닥을 인식해 성공여부를 판별할 것입니다.", font=('휴먼엑스포',18)).pack()
         tk.Label(self, text="").pack()
-        tk.Label(self, text="2. 다양한 모드를 선택해 색다른 게임플레이를 즐겨보세요.", font=('휴먼엑스포',17)).pack()
+        tk.Label(self, text="2. 다양한 모드를 선택해 색다른 게임플레이를 즐겨보세요.", font=('휴먼엑스포',18)).pack()
         tk.Label(self, text="").pack()
-        tk.Label(self, text="3. 점수표 화면을 통해 친한 친구들과 높은 점수를 노리고 경쟁해 보세요.", font=('휴먼엑스포',17)).pack()
+        tk.Label(self, text="3. 점수표 화면을 통해 친한 친구들과 높은 점수를 노리고 경쟁해 보세요.", font=('휴먼엑스포',18)).pack()
         tk.Label(self, text="").pack()
-        tk.Label(self, text="4. 상점에서 아이템을 구입해 다양한 혜택을 누려보세요.", font=('휴먼엑스포',17)).pack()
+        tk.Label(self, text="4. 상점에서 아이템을 구입해 다양한 혜택을 누려보세요.", font=('휴먼엑스포',18)).pack()
         tk.Label(self, text="").pack()
         tk.Label(self, text="").pack()
         tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',25)).pack()
+                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',20)).pack()
 
 class Setting(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         app.attributes("-fullscreen", False)
-        tk.Label(self, text="Setting", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=100)
+        tk.Label(self, text="Setting", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=70)
         tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu),font=('휴먼엑스포',25), width = 25 , height = 1).pack()
+                  command=lambda: master.switch_frame(mainmenu),font=('휴먼엑스포',20), width = 25 , height = 1).pack()
         tk.Label(self, text="").pack()
         tk.Button(self, text="Switch To Fullscreen",
-                  command=lambda: master.switch_frame(Setting1),font=('휴먼엑스포',25), width = 25 , height = 1).pack()
+                  command=lambda: master.switch_frame(Setting1),font=('휴먼엑스포',20), width = 25 , height = 1).pack()
         tk.Label(self, text="").pack()
         tk.Button(self, text="Music On",
-                  command=play,font=('휴먼엑스포',25), width = 12 , height = 1).pack(side=tk.LEFT)
+                  command=play,font=('휴먼엑스포',20), width = 12 , height = 1).pack(side=tk.LEFT)
         tk.Button(self, text="Music Off",
-                  command=stop,font=('휴먼엑스포',25), width = 12 , height = 1).pack(side=tk.RIGHT)
+                  command=stop,font=('휴먼엑스포',20), width = 12 , height = 1).pack(side=tk.RIGHT)
 
 
 class Setting1(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         app.attributes("-fullscreen", True)
-        tk.Label(self, text="Setting", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=100)
+        tk.Label(self, text="Setting", font=('휴먼엑스포',50)).pack(side="top", fill="x", pady=70)
         tk.Button(self, text="Go Back To Main Menu",
-                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',25), width = 25 , height = 1).pack()
+                  command=lambda: master.switch_frame(mainmenu), font=('휴먼엑스포',20), width = 25 , height = 1).pack()
         tk.Label(self, text="").pack()
         tk.Button(self, text="Switch To Window",
-                  command=lambda: master.switch_frame(Setting),font=('휴먼엑스포',25), width = 25 , height = 1).pack()
+                  command=lambda: master.switch_frame(Setting),font=('휴먼엑스포',20), width = 25 , height = 1).pack()
         tk.Label(self, text="").pack()
         tk.Button(self, text="Music On",
-                  command=play,font=('휴먼엑스포',25), width = 12 , height = 1).pack(side=tk.LEFT)
+                  command=play,font=('휴먼엑스포',20), width = 12 , height = 1).pack(side=tk.LEFT)
         tk.Button(self, text="Music Off",
-                  command=stop,font=('휴먼엑스포',25), width = 12 , height = 1).pack(side=tk.RIGHT)
+                  command=stop,font=('휴먼엑스포',20), width = 12 , height = 1).pack(side=tk.RIGHT)
 
 
 if __name__ == "__main__":
     app = SampleApp()
     app.title("Hand Figuration")
-    app.geometry('1600x900')
-    app.minsize(1600,900)
+    app.geometry('1366x768')
+    app.minsize(1366,768)
     app.maxsize(3840,2160)
     app.mainloop()
