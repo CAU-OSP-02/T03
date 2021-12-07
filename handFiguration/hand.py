@@ -32,8 +32,6 @@ cam = cv2.VideoCapture(0) #캠켜기
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, 480)  #캠크기 조절
 cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 480) #캠크기 조절
 
-
-
 while cam.isOpened():   #카메라가 열려있으면..
     success, image = cam.read() #한 프레임 씩 읽어옴
     if not success: #success 못하면 다음 프레임으로..?

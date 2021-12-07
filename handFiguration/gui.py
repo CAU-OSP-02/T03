@@ -9,8 +9,9 @@ import numpy as np
 import threading
 import datetime
 import os
-from PIL import Image
-from PIL import ImageTk
+#from PIL import Image
+#from PIL import ImageTk
+import PIL.Image, PIL.ImageTk
 from pygame import mixer
 from tkinter import *
 from tkinter import ttk
@@ -40,23 +41,24 @@ class camcamcam(tk.Frame):
             if (cap.isOpened() == False):
                 print("Unable to read camera feed")
 
-            while True:
-                ret, color = cap.read()
-                if (color != []):
+            while cap.isOpened():
+                success, image = cap.read()
+                if not success:
+                    continue
 
-                    image = cv2.cvtColor(color, cv2.COLOR_BGR2RGB)
-                    image = Image.fromarray(image)
-                    image = ImageTk.PhotoImage(image)
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                image = PIL.Image.fromarray(image)
+                image = PIL.ImageTk.PhotoImage(image)
 
-                    if Frame is None:
-                        Frame = tk.Label(image=image)
-                        Frame.image = image
-                        Frame.pack(side="left")
-                    else:
-                        Frame.configure(image=image)
-                        Frame.image = image
+                if Frame is None:
+                    Frame = tk.Label(image=image)
+                    Frame.image = image
+                    Frame.pack(side="left")
+                else:
+                    Frame.configure(image=image)
+                    Frame.image = image
 
-                    cv2.waitKey(1)
+                cv2.waitKey(1)
 
         if __name__ == '__main__':
 
