@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 
 import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 import pygame
 import sys
 import cv2
 import mediapipe as mp
 import numpy as np
 import threading
-import datetime
+#import datetime
 import os
 #from PIL import Image
 #from PIL import ImageTk
 import PIL.Image, PIL.ImageTk
 from pygame import mixer
-from tkinter import *
-from tkinter import ttk
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget
 from PyQt5.QtCore import Qt
-from sys import version_info
+#from sys import version_info
 import random as r
 
 pygame.mixer.init()
