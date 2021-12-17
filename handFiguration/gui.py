@@ -19,6 +19,7 @@ from tkinter import ttk
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget
 from PyQt5.QtCore import Qt
 from sys import version_info
+from multiprocessing import Process
 
 
 #pygame.mixer.init()
@@ -94,10 +95,41 @@ class SampleApp(tk.Tk):
 class realstart(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
-        realcam()
-        tk.Label(self, text="").pack()
-        tk.Button(self, text="Quit",
-                  command=lambda: quit(), font=('휴먼엑스포', 30)).pack()
+        p1 = Process(target = image)
+        p1.start()
+        p2 = Process(target = cam)
+        p2.start()
+        
+        #tk.Label(self, text="").pack()
+        #tk.Button(self, text="Quit",
+                  #command=lambda: quit(), font=('휴먼엑스포', 30)).pack()
+
+
+def image():
+    File = 'data\\hand_pic'
+    file_list = os.listdir(File)
+    real_file_list = [x for x in file_list if(x.endswith(".JPEG") or (x.endswith(".jpeg")==True))]
+    print(real_file_list)
+
+    xn=0
+    root=Tk()
+    root.title("Source Image")
+    root.geometry("1000x1000+1000+0")
+    root.resizable(0, 0)
+    idx = r.randrange(14)
+
+    img = PIL.ImageTk.PhotoImage(PIL.Image.open('data\\hand_pic\\'+ str(idx) +'.jpeg'))
+    label = Label(image=img)
+    label.pack()
+
+    #n = Button(root, text='ran', command=)
+    #n.pack()
+
+    quit = Button(root, text='종료하기', command=root.quit)
+    quit.pack()
+
+    print(xn)
+    root.mainloop()
 
 def cam():
     hand_gesture = {
@@ -193,12 +225,13 @@ def cam():
 
     cam.release()
 
+
 class mainmenu(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         tk.Label(self, text="Hand Figuration", font=('휴먼엑스포', 60)).pack(side="top", fill="x", pady=150)
         tk.Button(self, text="Start",
-                  command=lambda: cam(), width = 10 , height = 1, font=('휴먼엑스포', 30)).pack()
+                  command=lambda: master.switch_frame(Start), width = 10 , height = 1, font=('휴먼엑스포', 30)).pack()
         tk.Label(self, text="").pack()
         #tk.Button(self, text="Store",
                   #command=lambda: master.switch_frame(Store), width = 10 , height = 1, font=('휴먼엑스포', 30)).pack()

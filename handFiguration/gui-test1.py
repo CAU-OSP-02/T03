@@ -79,6 +79,7 @@ def realcam():
                 else:
                     Frame.configure(image=image)
                     Frame.image = image
+                    
 
         if __name__ == '__main__':
                 thread_img = threading.Thread(target=camThread, args=())
